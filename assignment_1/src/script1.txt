@@ -1,0 +1,332 @@
+Script started on 2018-09-28 14:50:20-06:00
+]0;daniel.contreras@csa3:~/cpsc_355/CPSC-355/assignment_1/srcdaniel.contreras@csa3:~/cpsc_355/CPSC-355/assignment_1/src$ gdb asi[Ksign1a.oi[Kut 
+GNU gdb (GDB) Fedora 8.1.1-3.fc28
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "aarch64-redhat-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from assign1a.out...(no debugging symbols found)...done.
+(gdb) b main
+Breakpoint 1 at 0x4005d4
+(gdb) r
+Starting program: /home/ugd/daniel.contreras/cpsc_355/CPSC-355/assignment_1/src/assign1a.out 
+warning: the debug information found in "/usr/lib/debug//usr/lib64/ld-2.27.so.debug" does not match "/lib/ld-linux-aarch64.so.1" (CRC mismatch).
+
+Missing separate debuginfos, use: dnf debuginfo-install glibc-2.27-32.fc28.aarch64
+warning: the debug information found in "/usr/lib/debug//lib64/libc-2.27.so.debug" does not match "/lib64/libc.so.6" (CRC mismatch).
+
+warning: the debug information found in "/usr/lib/debug//usr/lib64/libc-2.27.so.debug" does not match "/lib64/libc.so.6" (CRC mismatch).
+
+
+Breakpoint 1, 0x00000000004005d4 in main ()
+(gdb) display/i $pc
+1: x/i $pc
+=> 0x4005d4 <main+8>:	mov	x19, #0xfffffffffffffffa    	// #-6
+(gdb) ni
+0x00000000004005d8 in main ()
+1: x/i $pc
+=> 0x4005d8 <main+12>:	mov	x20, #0xffffffffffff3cb0    	// #-50000
+(gdb) ni
+0x00000000004005dc in main ()
+1: x/i $pc
+=> 0x4005dc <main+16>:	mov	x21, #0xffffffffffff3cb0    	// #-50000
+(gdb) ni
+0x00000000004005e0 in main ()
+1: x/i $pc
+=> 0x4005e0 <main+20>:	mov	x22, #0xfffffffffffffffb    	// #-5
+(gdb) ni
+0x00000000004005e4 in main ()
+1: x/i $pc
+=> 0x4005e4 <main+24>:	mov	x23, #0xffffffffffffffe1    	// #-31
+(gdb) ni
+0x00000000004005e8 in main ()
+1: x/i $pc
+=> 0x4005e8 <main+28>:	mov	x24, #0x4                   	// #4
+(gdb) ni
+0x00000000004005ec in main ()
+1: x/i $pc
+=> 0x4005ec <main+32>:	mov	x25, #0x1f                  	// #31
+(gdb) ni
+0x00000000004005f0 in test ()
+1: x/i $pc
+=> 0x4005f0 <test>:	cmp	x19, #0x5
+(gdb) ni
+0x00000000004005f4 in test ()
+1: x/i $pc
+=> 0x4005f4 <test+4>:	b.gt	0x400648 <done>
+(gdb) ni
+0x00000000004005f8 in top ()
+1: x/i $pc
+=> 0x4005f8 <top>:	mul	x20, x19, x19
+(gdb) ni
+0x00000000004005fc in top ()
+1: x/i $pc
+=> 0x4005fc <top+4>:	mul	x20, x20, x19
+(gdb) ni
+0x0000000000400600 in top ()
+1: x/i $pc
+=> 0x400600 <top+8>:	mul	x20, x20, x22
+(gdb) ni
+0x0000000000400604 in top ()
+1: x/i $pc
+=> 0x400604 <top+12>:	mul	x27, x19, x19
+(gdb) ni
+0x0000000000400608 in top ()
+1: x/i $pc
+=> 0x400608 <top+16>:	mul	x27, x27, x23
+(gdb) ni
+0x000000000040060c in top ()
+1: x/i $pc
+=> 0x40060c <top+20>:	add	x20, x20, x27
+(gdb) ni
+0x0000000000400610 in top ()
+1: x/i $pc
+=> 0x400610 <top+24>:	mul	x28, x19, x24
+(gdb) ni
+0x0000000000400614 in top ()
+1: x/i $pc
+=> 0x400614 <top+28>:	add	x20, x20, x28
+(gdb) ni
+0x0000000000400618 in top ()
+1: x/i $pc
+=> 0x400618 <top+32>:	add	x20, x20, x25
+(gdb) ni
+0x000000000040061c in top ()
+1: x/i $pc
+=> 0x40061c <top+36>:	cmp	x21, x20
+(gdb) ni
+0x0000000000400620 in top ()
+1: x/i $pc
+=> 0x400620 <top+40>:	b.gt	0x400628 <print>
+(gdb) ni
+0x0000000000400624 in top ()
+1: x/i $pc
+=> 0x400624 <top+44>:	mov	x21, x20
+(gdb) ni
+0x0000000000400628 in print ()
+1: x/i $pc
+=> 0x400628 <print>:	adrp	x0, 0x400000
+(gdb) ni
+0x000000000040062c in print ()
+1: x/i $pc
+=> 0x40062c <print+4>:	add	x0, x0, #0x594
+(gdb) ni
+0x0000000000400630 in print ()
+1: x/i $pc
+=> 0x400630 <print+8>:	mov	x1, x19
+(gdb) ni
+0x0000000000400634 in print ()
+1: x/i $pc
+=> 0x400634 <print+12>:	mov	x2, x20
+(gdb) ni
+0x0000000000400638 in print ()
+1: x/i $pc
+=> 0x400638 <print+16>:	mov	x3, x21
+(gdb) ni
+0x000000000040063c in print ()
+1: x/i $pc
+=> 0x40063c <print+20>:	bl	0x400480 <printf@plt>
+(gdb) ni
+Current Values:
+	x: -6
+	y: -29
+	Current Maximum: -29
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni[K[K$[Kni\[K[K[Kp/d[Kd[Kx[Kd $x19
+$1 = -6
+(gdb) p/d $x19[K[K20
+$2 = -29
+(gdb) p/d $x20[K1
+$3 = -29
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: -5
+	y: -139
+	Current Maximum: -29
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) nip/d $x21019
+$4 = -5
+(gdb) p/d $x19[C[C[C[C[C[Cni[Kp/d $x210
+$5 = -139
+(gdb) p/d $x2019[C[C[C[C[C[Cni[Kp/d $x21
+$6 = -29
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: -4
+	y: -161
+	Current Maximum: -29
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) nip/d $x21019
+$7 = -4
+(gdb) p/d $x19[C[C[C[C[C[Cni[Kp/d $x210
+$8 = -161
+(gdb) p/d $x2019[C[C[C[C[C[Cni[Kp/d $x21
+$9 = -29
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: -3
+	y: -125
+	Current Maximum: -29
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) nip/d $x21019
+$10 = -3
+(gdb) p/d $x19[C[C[C[C[C[Cni[Kp/d $x210
+$11 = -125
+(gdb) p/d $x2019[C[C[C[C[C[Cni[Kp/d $x21
+$12 = -29
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: -2
+	y: -61
+	Current Maximum: -29
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: -1
+	y: 1
+	Current Maximum: 1
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: 0
+	y: 31
+	Current Maximum: 31
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) nip/d $x2101019[C[C[C[C[C[Cni[Kp/d $x19
+$13 = 0
+(gdb) p/d $x19[C[C[C[C[C[Cni[Kp/d $x210
+$14 = 31
+(gdb) p/d $x2019[C[C[C[C[C[Cni[Kp/d $x21
+$15 = 31
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: 1
+	y: -1
+	Current Maximum: 31
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: 2
+	y: -125
+	Current Maximum: 31
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: 3
+	y: -371
+	Current Maximum: 31
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: 4
+	y: -769
+	Current Maximum: 31
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+Current Values:
+	x: 5
+	y: -1349
+	Current Maximum: 31
+
+0x0000000000400640 in print ()
+1: x/i $pc
+=> 0x400640 <print+24>:	add	x19, x19, #0x1
+(gdb) ni
+0x0000000000400644 in print ()
+1: x/i $pc
+=> 0x400644 <print+28>:	b	0x4005f0 <test>
+(gdb) ni
+[Inferior 1 (process 14306) exited normally]
+(gdb) ni
+The program is not being run.
+(gdb) quit
+]0;daniel.contreras@csa3:~/cpsc_355/CPSC-355/assignment_1/srcdaniel.contreras@csa3:~/cpsc_355/CPSC-355/assignment_1/src$ exit
+exit
+
+Script done on 2018-09-28 14:52:30-06:00
