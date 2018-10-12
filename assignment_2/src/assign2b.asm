@@ -23,8 +23,8 @@ fmt3:       .string "64-bit result = 0x%016lx (%ld)\n"                          
 main:       stp     x29, x30, [sp, -16]!                                            // allocate stack space
             mov     x29, sp                                                         // Update fp
 
-            mov     w_multiplicand, -16843010                                       // Initialize multiplicand to -16843010
-            mov     w_multiplier, 70                                                // Initialize multiplier to 70
+            mov     w_multiplicand, 522133279                                       // Initialize multiplicand to 522133279
+            mov     w_multiplier, 200                                               // Initialize multiplier to 200
             mov     w_product, 0                                                    // Initialize product to 0
             mov     w_negative, 0                                                   // Initialize negative to 0 (FALSE)
             mov     w_i, 0
