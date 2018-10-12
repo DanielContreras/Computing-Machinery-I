@@ -38,29 +38,29 @@ main:       stp     x29, x30, [sp, -16]!                                        
             bl      printf                                                          // Call printf function
 
             cmp     w_multiplier, 0                                                 // Compare multiplier to 0
-            b.ge    top                                                             // If multiplier is > 0, branch to test
+            b.ge    if                                                              // If multiplier is > 0, branch to test
             mov     w_negative, 1                                                   // Otherwise set negative to 1 (TRUE)
             b       test                                                            // Branch to test
 
-top:        tst     w_multiplier, 0x1                                               // Perform an ands to eval multiplier with 0x1
-            b.eq    top2                                                            // Branch to top1 on equal (Z flag == 1)
-            add     w_product, w_product, w_multiplicand                            // Perform inner if by adding product + multiplicand
+if:        tst     w_multiplier, 0x1                                                // Perform an ands to eval multiplier with 0x1
+           b.eq    for_body                                                            // Branch to top1 on equal (Z flag == 1)
+           add     w_product, w_product, w_multiplicand                             // Perform inner if by adding product + multiplicand
 
-top2:       asr     w_multiplier, w_multiplier, 1                                   // Arithmetic shift right the combined product and multiplier
-            tst     w_product, 0x1                                                  // if (product & 0x1)
-            b.ne    inner_if2                                                       // Branch on not equal to inner_else
-            and     w_multiplier, w_multiplier, 0x7FFFFFFF                          // else, 
-            b       top3
+for_body:  asr     w_multiplier, w_multiplier, 1                                    // Arithmetic shift right the combined product and multiplier
+if_2:      tst     w_product, 0x1                                                   // if (product & 0x1)
+           b.ne    inner_if2                                                        // Branch on not equal to inner_else
+else:      and     w_multiplier, w_multiplier, 0x7FFFFFFF                           // else, 
+           b       for_body2
 
 inner_if2:  orr     w_multiplier, w_multiplier, 0x80000000                          // Perform inclusive OR and store value in multiplier
 
-top3:       asr     w_product, w_product, 1                                         // Arithmetic shift right
+for_body2:  asr     w_product, w_product, 1                                         // Arithmetic shift right
             add     w_i, w_i, 1                                                     // Increment loop counter
 
 test:       cmp     w_i, 32                                                         // Compare i to 32
-            b.lt    top                                                             // If i is less-than 32, branch to top
+            b.lt    if                                                              // If i is less-than 32, branch to if
 
-            cmp     w_negative, 0                                                   // Compare negative to 0 ==> if(negative)
+if3:        cmp     w_negative, 0                                                   // Compare negative to 0 ==> if(negative)
             b.eq    final                                                           // Breanch on equal to final
             sub     w_product, w_product, w_multiplicand                            // Adjust product register if multiplier is negative
 
