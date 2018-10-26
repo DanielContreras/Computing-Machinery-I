@@ -1,0 +1,178 @@
+Script started on 2018-10-26 15:26:50-06:00
+gd]0;daniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_3/srcdaniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_3/src$ gdp[K[K[Kgdb assign3.out 
+GNU gdb (GDB) Fedora 8.1.1-3.fc28
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "aarch64-redhat-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from assign3.out...done.
+(gdb) b 63
+Breakpoint 1 at 0x400648: file assign3.s, line 63.
+(gdb) b done
+Breakpoint 2 at 0x400704: file assign3.s, line 122.
+(gdb) r
+Starting program: /home/ugd/daniel.contreras/cpsc_355/CPSC-355/assignment_3/src/assign3.out 
+warning: the debug information found in "/usr/lib/debug//usr/lib64/ld-2.27.so.debug" does not match "/lib/ld-linux-aarch64.so.1" (CRC mismatch).
+
+Missing separate debuginfos, use: dnf debuginfo-install glibc-2.27-32.fc28.aarch64
+warning: the debug information found in "/usr/lib/debug//lib64/libc-2.27.so.debug" does not match "/lib64/libc.so.6" (CRC mismatch).
+
+warning: the debug information found in "/usr/lib/debug//usr/lib64/libc-2.27.so.debug" does not match "/lib64/libc.so.6" (CRC mismatch).
+
+v[0]: 103
+v[1]: 198
+v[2]: 105
+v[3]: 115
+v[4]: 81
+v[5]: 255
+v[6]: 74
+v[7]: 236
+v[8]: 41
+v[9]: 205
+v[10]: 186
+v[11]: 171
+v[12]: 242
+v[13]: 251
+v[14]: 227
+v[15]: 70
+v[16]: 124
+v[17]: 194
+v[18]: 84
+v[19]: 248
+v[20]: 27
+v[21]: 232
+v[22]: 231
+v[23]: 141
+v[24]: 118
+v[25]: 90
+v[26]: 46
+v[27]: 99
+v[28]: 51
+v[29]: 159
+v[30]: 201
+v[31]: 154
+v[32]: 102
+v[33]: 50
+v[34]: 13
+v[35]: 183
+v[36]: 49
+v[37]: 88
+v[38]: 163
+v[39]: 90
+v[40]: 37
+v[41]: 93
+v[42]: 5
+v[43]: 23
+v[44]: 88
+v[45]: 233
+v[46]: 94
+v[47]: 212
+v[48]: 171
+v[49]: 178
+
+Breakpoint 1, test1 () at assign3.s:63
+63	            mov     w20, 1                            // Initialize i to 1
+(gdb) x/50d $fp + 28
+0xfffffffff03c:	103	198	105	115
+0xfffffffff04c:	81	255	74	236
+0xfffffffff05c:	41	205	186	171
+0xfffffffff06c:	242	251	227	70
+0xfffffffff07c:	124	194	84	248
+0xfffffffff08c:	27	232	231	141
+0xfffffffff09c:	118	90	46	99
+0xfffffffff0ac:	51	159	201	154
+0xfffffffff0bc:	102	50	13	183
+0xfffffffff0cc:	49	88	163	90
+0xfffffffff0dc:	37	93	5	23
+0xfffffffff0ec:	88	233	94	212
+0xfffffffff0fc:	171	178
+(gdb) c
+Continuing.
+
+Sorted array:
+v[0]: 5
+v[1]: 13
+v[2]: 23
+v[3]: 27
+v[4]: 37
+v[5]: 41
+v[6]: 46
+v[7]: 49
+v[8]: 50
+v[9]: 51
+v[10]: 70
+v[11]: 74
+v[12]: 81
+v[13]: 84
+v[14]: 88
+v[15]: 88
+v[16]: 90
+v[17]: 90
+v[18]: 93
+v[19]: 94
+v[20]: 99
+v[21]: 102
+v[22]: 103
+v[23]: 105
+v[24]: 115
+v[25]: 118
+v[26]: 124
+v[27]: 141
+v[28]: 154
+v[29]: 159
+v[30]: 163
+v[31]: 171
+v[32]: 171
+v[33]: 178
+v[34]: 183
+v[35]: 186
+v[36]: 194
+v[37]: 198
+v[38]: 201
+v[39]: 205
+v[40]: 212
+v[41]: 227
+v[42]: 231
+v[43]: 232
+v[44]: 233
+v[45]: 236
+v[46]: 242
+v[47]: 248
+v[48]: 251
+v[49]: 255
+
+Breakpoint 2, done () at assign3.s:122
+122	done:       mov w0, 0                                       // Set return value
+(gdb) cx/50d $fp + 28
+0xfffffffff03c:	5	13	23	27
+0xfffffffff04c:	37	41	46	49
+0xfffffffff05c:	50	51	70	74
+0xfffffffff06c:	81	84	88	88
+0xfffffffff07c:	90	90	93	94
+0xfffffffff08c:	99	102	103	105
+0xfffffffff09c:	115	118	124	141
+0xfffffffff0ac:	154	159	163	171
+0xfffffffff0bc:	171	178	183	186
+0xfffffffff0cc:	194	198	201	205
+0xfffffffff0dc:	212	227	231	232
+0xfffffffff0ec:	233	236	242	248
+0xfffffffff0fc:	251	255
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 7085] will be killed.
+
+Quit anyway? (y or n) y
+]0;daniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_3/srcdaniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_3/src$ exit
+exit
+
+Script done on 2018-10-26 15:28:22-06:00
