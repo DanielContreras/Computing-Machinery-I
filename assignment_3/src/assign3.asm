@@ -22,9 +22,9 @@ define(index_j_r, w21)                                      // Define register f
 
             /** Equates of the offsets (base: FP) **/   
             i_s = 16                                        // Set size of i relative to Frame Record
-            j_s = 20                                        // Set size of j relative to Frame Record
-            temp_s = 24                                     // Set size of temp relative to Frame Record
-            v_s = 28                                        // Set size of v relative to Frame Record
+            j_s = i_s + j_size                              // Set size of j relative to Frame Record
+            temp_s = j_s + temp_size                        // Set size of temp relative to Frame Record
+            v_s = temp_s + 4                                // Set size of v relative to Frame Record
     
 
     
