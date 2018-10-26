@@ -4,28 +4,29 @@
  * CPSC 355 Fall 2018
  */
 
-/** Assembler offset Equates **/
-SIZE = 50                                                   // Set SIZE to 50
-i_size = 4                                                  // Size of i (4 bytes)
-j_size = 4                                                  // Size of j (4 bytes)
-temp_size = 4                                               // Size of temp (4 bytes)
-v_size = 4 * SIZE                                           // Size of array (4*50 bytes)
-    
-/** Allocate memory for stack **/   
-alloc = i_size + j_size + temp_size + v_size                // Set alloc to the size of all the offsets
-alloc = -(16 + alloc) & -16                                 // Align program
-dealloc = -alloc                                            // Set dealloc to free all memory at the end of the program
-    
-/** Equates of the offsets (base: FP) **/   
-i_s = 16                                                    // Set size of i relative to Frame Record
-j_s = 20                                                    // Set size of j relative to Frame Record
-temp_s = 24                                                 // Set size of temp relative to Frame Record
-v_s = 28                                                    // Set size of v relative to Frame Record
-    
 define(v_base_r, x19)                                       // Define v_base_r for offset of v[]
-//define(index_r, w20)                                      // Define index (commonly used variable for i and j indices)
 define(index_i_r, w20)                                      // Define register for index i
 define(index_j_r, w21)                                      // Define register for index j
+
+            /** Assembler offset Equates **/
+            SIZE = 50                                       // Set SIZE to 50
+            i_size = 4                                      // Size of i (4 bytes)
+            j_size = 4                                      // Size of j (4 bytes)
+            temp_size = 4                                   // Size of temp (4 bytes)
+            v_size = 4 * SIZE                               // Size of array (4*50 bytes)
+
+            /** Allocate memory for stack **/   
+            alloc = i_size + j_size + temp_size + v_size    // Set alloc to the size of all the offsets
+            alloc = -(16 + alloc) & -16                     // Align program
+            dealloc = -alloc                                // Set dealloc to free all memory at the end of the program
+
+            /** Equates of the offsets (base: FP) **/   
+            i_s = 16                                        // Set size of i relative to Frame Record
+            j_s = 20                                        // Set size of j relative to Frame Record
+            temp_s = 24                                     // Set size of temp relative to Frame Record
+            v_s = 28                                        // Set size of v relative to Frame Record
+    
+
     
 fp          .req x29                                        // Define fp as x29
 lr          .req x30                                        // Define lr as x30
