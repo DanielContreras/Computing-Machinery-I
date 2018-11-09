@@ -18,7 +18,7 @@
 
             /** box struct (20 bytes total) */
             box_origin = 0                                          // offset - point struct (8 bytes)
-            box_dimension = 8                                          // offset - dimension struct (8 bytes)
+            box_dimension = 8                                       // offset - dimension struct (8 bytes)
             box_area = 16                                           // offset - int (4 bytes)
             box_size = 20                                           // Size of box (20 bytes)
 
@@ -203,3 +203,4 @@ ret_false:  mov     w0, FALSE                                       // Set retur
 
 endequal:	ldp     fp, lr, [sp], 16						        // Deallocate space
 		    ret								                        // Return to caller
+

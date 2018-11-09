@@ -1,0 +1,67 @@
+Script started on 2018-11-09 15:49:25-07:00
+]0;daniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_4/srcdaniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_4/src$ vim assign4.asm [6P./test.sh[C[6@vim assign4.asm[C[6P./test.sh[C[6@vim assign4.asm[C[6P./test.sh[Cchmod +x test.sh[6P./test.sh [K[K[K[K[K[K[K[K[K[Kgdb assign4.out 
+GNU gdb (GDB) Fedora 8.1.1-3.fc28
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "aarch64-redhat-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from assign4.out...done.
+(gdb) b 56
+Breakpoint 1 at 0x400624: file assign4.s, line 56.
+(gdb) b 85
+Breakpoint 2 at 0x400684: file assign4.s, line 85.
+(gdb) c
+The program is not being run.
+(gdb) x/5d $fp+16[K[K[K[K[K[K[K[K[K[K[Kr
+Starting program: /home/ugd/daniel.contreras/cpsc_355/CPSC-355/assignment_4/src/assign4.out 
+warning: the debug information found in "/usr/lib/debug//usr/lib64/ld-2.27.so.debug" does not match "/lib/ld-linux-aarch64.so.1" (CRC mismatch).
+
+Missing separate debuginfos, use: dnf debuginfo-install glibc-2.27-32.fc28.aarch64
+warning: the debug information found in "/usr/lib/debug//lib64/libc-2.27.so.debug" does not match "/lib64/libc.so.6" (CRC mismatch).
+
+warning: the debug information found in "/usr/lib/debug//usr/lib64/libc-2.27.so.debug" does not match "/lib64/libc.so.6" (CRC mismatch).
+
+
+Breakpoint 1, main () at assign4.s:57
+57	            adrp    x0, fmt2                                        // Add fmt to x0
+(gdb) x/5d $fp+16
+0xfffffffff0e0:	0	0	1	1
+0xfffffffff0f0:	1
+(gdb) x/5d $fp+16[K[K36
+0xfffffffff0f4:	0	0	1	1
+0xfffffffff104:	1
+(gdb) c
+Continuing.
+Initial box values:
+Box first origin = (0, 0)  width = 1  height = 1  area = 1
+Box second origin = (0, 0)  width = 1  height = 1  area = 1
+
+Breakpoint 2, next () at assign4.s:87
+87	            add     x0, x0, :lo12:fmt3                              // Format string
+(gdb) cx/5d $fp+3616
+0xfffffffff0e0:	-5	7	1	1
+0xfffffffff0f0:	1
+(gdb) x/5d $fp+16[C[C[C[C[C[Cc[Kx/5d $fp+36
+0xfffffffff0f4:	0	0	3	3
+0xfffffffff104:	9
+(gdb) c
+Continuing.
+
+Changed box values:
+Box first origin = (-5, 7)  width = 1  height = 1  area = 1
+Box second origin = (0, 0)  width = 3  height = 3  area = 9
+[Inferior 1 (process 7991) exited with code 074]
+(gdb) quit
+]0;daniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_4/srcdaniel.contreras@csa2:~/cpsc_355/CPSC-355/assignment_4/src$ exit
+exit
+
+Script done on 2018-11-09 15:50:25-07:00
