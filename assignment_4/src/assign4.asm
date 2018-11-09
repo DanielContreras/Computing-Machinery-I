@@ -18,7 +18,7 @@
 
             /** box struct (20 bytes total) */
             box_origin = 0                                          // offset - point struct (8 bytes)
-            box_d_size = 8                                          // offset - dimension struct (8 bytes)
+            box_dimension = 8                                          // offset - dimension struct (8 bytes)
             box_area = 16                                           // offset - int (4 bytes)
             box_size = 20                                           // Size of box (20 bytes)
 
@@ -72,6 +72,7 @@ main:       stp     fp, lr, [sp, alloc]!                            // Memory al
             add     x1, fp, second_s                                // Add second argument (address of second box)
             bl      printBox                                        // call printBox
 
+            // Passesd
             adrp    x0, test                                        
             add     x0, x0, :lo12:test                              
             bl      printf                                          
@@ -83,6 +84,7 @@ main:       stp     fp, lr, [sp, alloc]!                            // Memory al
             cmp     w0, FALSE                                       // Compare result with 0 (FALSE)
             b.eq    next                                            // If result is 0 (False) then leave if statement
 
+            // Failed
             adrp    x0, test                                        
             add     x0, x0, :lo12:test                              
             bl      printf     
@@ -93,6 +95,7 @@ main:       stp     fp, lr, [sp, alloc]!                            // Memory al
             mov     w2, 7                                           // Load third arg into w2
             bl      move                                            // Call move()
 
+            // Failed
             adrp    x0, test                                        
             add     x0, x0, :lo12:test                              
             bl      printf     
@@ -102,6 +105,7 @@ main:       stp     fp, lr, [sp, alloc]!                            // Memory al
             mov     w1, 3                                           // Load second arg into w1
             bl      expand                                          // Call expand()
 
+            // Failed
             adrp    x0, test                                        
             add     x0, x0, :lo12:test                              
             bl      printf     
@@ -139,8 +143,8 @@ newBox:     stp     fp, lr, [sp, b_alloc]!                          // Create al
             str     xzr, [x8, box_origin + point_x]           // b.origin.x = 0
             str     xzr, [x8, box_origin + point_y]           // b.origin.y = 0
 
-            str     w9, [x8, box_d_size + dimension_width]    // b.size.width = 1
-            str     w9, [x8, box_d_size + dimension_height]   // b.size.height = 1
+            str     w9, [x8, box_dimension + dimension_width]    // b.size.width = 1
+            str     w9, [x8, box_dimension + dimension_height]   // b.size.height = 1
 
             str     w9, [x8, box_area]                       // Store w10 (area) in memory
 
@@ -167,13 +171,13 @@ move:       stp     fp, lr, [sp, -16]!                              // Allocate 
 expand:     stp     fp, lr, [sp, -16]!                              // Allocate space in memory
             mov     fp, sp                                          // Update fp
 
-            ldr     w9, [x0, box_d_size + dimension_width]          // Load b->size.width into w9
+            ldr     w9, [x0, box_dimension + dimension_width]          // Load b->size.width into w9
             mul     w9, w9, w1                                      // b->size.width *= factor
-            str     w9, [x0, box_d_size + dimension_width]          // Store result back into memory
+            str     w9, [x0, box_dimension + dimension_width]          // Store result back into memory
 
-            ldr     w10, [x0, box_d_size + dimension_height]        // Load b->size.height into w10
+            ldr     w10, [x0, box_dimension + dimension_height]        // Load b->size.height into w10
             mul     w10, w10, w1                                    // b->size.height *= factor
-            str     w10, [x0, box_d_size + dimension_height]        // Store result back into memory
+            str     w10, [x0, box_dimension + dimension_height]        // Store result back into memory
 
             mul     w9, w9, w10                                     // w9 = width * height (area)
             str     w9, [x0, box_area]                              // Store result into memory
@@ -188,8 +192,8 @@ printBox:   stp     fp, lr, [sp, -16]!                              // Allocate 
 
             ldr     w2, [x1, box_origin + point_x]                  // Load second arg 
             ldr     w3, [x1, box_origin + point_y]                  // Load third arg
-            ldr     w4, [x1, box_d_size + dimension_width]          // Load fourth arg
-            ldr     w5, [x1, box_d_size + dimension_height]         // Load fifth arg
+            ldr     w4, [x1, box_dimension + dimension_width]          // Load fourth arg
+            ldr     w5, [x1, box_dimension + dimension_height]         // Load fifth arg
             ldr     w6, [x1, box_area]                              // Load sixth arg
            
             mov     x1, x0 
@@ -201,34 +205,38 @@ printBox:   stp     fp, lr, [sp, -16]!                              // Allocate 
             ret                                                     // Return to caller
 
 /** equal function */
- define(result_r, w0)                                               // Create macro definition for result
+// define(result_r, w0)                                               // Create macro definition for result
 
-equal:      stp     fp, lr, [sp, -16]!                              // Allocate space in memory
-            mov     fp, sp                                          // Update fp
+equal:		stp x29, x30, [sp, -16]!					// Allocate 16 bytes of memory for the equal subroutine
+		mov fp, sp							// Move SP to new FP
 
-            mov     result_r, FALSE                                 // int result = FALSE
+		mov x19, x0							// x0 is input: base of struct box 1
+		mov x20, x1							// x1 is input: base of struct box 2
 
-            ldr     w10, [x0, box_origin + point_x]                 // w10 = b1->origin.x
-            ldr     w11, [x1, box_origin + point_x]                 // w11 = b2->origin.x
-            cmp     w10, w11                                        // Compare w10 with w11
-            b.ne    endequal                                        // If they are not equal, return false
+		ldr x21, [x19, box_origin + point_x]				// Load box1_origin_x into x21
+		ldr x22, [x20, box_origin + point_x]				// Load box2_origin_x into x22
+		cmp x21, x22							// Compare two numbers
+		b.ne false_eq							// If the two numbers are not equal, branch to return false.
 
-            ldr     w10, [x0, box_origin + point_y]                 // w10 = b1->origin.y
-            ldr     w11, [x1, box_origin + point_y]                 // w11 = b2->origin.y
-            cmp     w10, w11                                        // Compare w10 with w11
-            b.ne    endequal                                        // If they are not equal, return false
+		ldr x21, [x19, box_origin + point_y]				// Load box1_origin_y into x21
+		ldr x22, [x20, box_origin + point_y]				// Load box2_origin_y into x22
+		cmp x21, x22							// Compare two numbers
+		b.ne false_eq							// If the two numbers are not equal, branch to return false.
 
-            ldr     w10, [x0, box_d_size + dimension_width]         // w10 = b1->size.width
-            ldr     w11, [x1, box_d_size + dimension_width]         // w11 = b2->size.width
-            cmp     w10, w11                                        // Compare w10 with w11
-            b.ne    endequal                                        // If they are not equal, return false
+		ldr x21, [x19, box_dimension + dimension_width]			// Load box1_width into x21
+		ldr x22, [x20, box_dimension + dimension_width]			// Load box2_width into x22
+		cmp x21, x22							// Compare two numbers
+		b.ne false_eq							// If the two numbers are not equal, branch to return false.
 
-            ldr     w10, [x0, box_d_size + dimension_height]        // w10 = b1->size.height
-            ldr     w11, [x1, box_d_size + dimension_height]        // w11 = b2->size.height
-            cmp     w10, w11                                        // Compare w10 with w11
-            b.ne    endequal                                        // If they are not equal, return false
+		ldr x21, [x19, box_dimension + dimension_height]		// Load box1_height into x21
+		ldr x22, [x20, box_dimension + dimension_height]		// Load box2_height into x22
+		cmp x21, x22							// Compare two numbers
+		b.ne false_eq							// If the two numbers are not equal, branch to return false.
 
-            mov     result_r, TRUE                                  // Otherwise, return true
+		mov x0, TRUE							// If the program has got to this point, all variables are equal. Set x0 to true.
+		b done_eq							// Branch to the end of the program.
+false_eq:		
+		mov x0, FALSE							// Set x0 to false.
 
-endequal:   ldp     fp, lr, [sp], 16                                // Deallocate space
-            ret                                                     // Return to caller
+done_eq:	ldp x29, x30, [sp], 16						// De-allocate the frame record
+		ret	                                                    // Return to caller
