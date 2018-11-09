@@ -205,38 +205,32 @@ printBox:   stp     fp, lr, [sp, -16]!                              // Allocate 
             ret                                                     // Return to caller
 
 /** equal function */
-// define(result_r, w0)                                               // Create macro definition for result
+equal:		stp     fp, lr, [sp, -16]!					// Allocate 16 bytes of memory for the equal subroutine
+		    mov     fp, sp							// Move SP to new FP
 
-equal:		stp x29, x30, [sp, -16]!					// Allocate 16 bytes of memory for the equal subroutine
-		mov fp, sp							// Move SP to new FP
+            mov     w0, FALSE
 
-		mov x19, x0							// x0 is input: base of struct box 1
-		mov x20, x1							// x1 is input: base of struct box 2
+		    ldr     w10, [x0, box_origin + point_x]				// Load box1_origin_x into w10
+		    ldr     w11, [x1, box_origin + point_x]				// Load box2_origin_x into w11
+		    cmp     w10, w11							// Compare two numbers
+		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
 
-		ldr x21, [x19, box_origin + point_x]				// Load box1_origin_x into x21
-		ldr x22, [x20, box_origin + point_x]				// Load box2_origin_x into x22
-		cmp x21, x22							// Compare two numbers
-		b.ne false_eq							// If the two numbers are not equal, branch to return false.
+		    ldr     w10, [x0, box_origin + point_y]				// Load box1_origin_y into w10
+		    ldr     w11, [x1, box_origin + point_y]				// Load box2_origin_y into w11
+		    cmp     w10, w11							// Compare two numbers
+		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
 
-		ldr x21, [x19, box_origin + point_y]				// Load box1_origin_y into x21
-		ldr x22, [x20, box_origin + point_y]				// Load box2_origin_y into x22
-		cmp x21, x22							// Compare two numbers
-		b.ne false_eq							// If the two numbers are not equal, branch to return false.
+		    ldr     w10, [x0, box_dimension + dimension_width]			// Load box1_width into w10
+		    ldr     w11, [x1, box_dimension + dimension_width]			// Load box2_width into w11
+		    cmp     w10, w11							// Compare two numbers
+		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
 
-		ldr x21, [x19, box_dimension + dimension_width]			// Load box1_width into x21
-		ldr x22, [x20, box_dimension + dimension_width]			// Load box2_width into x22
-		cmp x21, x22							// Compare two numbers
-		b.ne false_eq							// If the two numbers are not equal, branch to return false.
+		    ldr     w10, [x0, box_dimension + dimension_height]		// Load box1_height into w10
+		    ldr     w11, [x1, box_dimension + dimension_height]		// Load box2_height into w11
+		    cmp     w10, w11							// Compare two numbers
+		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
 
-		ldr x21, [x19, box_dimension + dimension_height]		// Load box1_height into x21
-		ldr x22, [x20, box_dimension + dimension_height]		// Load box2_height into x22
-		cmp x21, x22							// Compare two numbers
-		b.ne false_eq							// If the two numbers are not equal, branch to return false.
+		    mov     w0, TRUE							// If the program has got to this point, all variables are equal. Set x0 to true.
 
-		mov x0, TRUE							// If the program has got to this point, all variables are equal. Set x0 to true.
-		b done_eq							// Branch to the end of the program.
-false_eq:		
-		mov x0, FALSE							// Set x0 to false.
-
-done_eq:	ldp x29, x30, [sp], 16						// De-allocate the frame record
-		ret	                                                    // Return to caller
+endequal:	ldp     fp, lr, [sp], 16						// De-allocate the frame record
+		    ret								// Return to caller.                                                  // Return to caller
