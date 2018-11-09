@@ -24,12 +24,10 @@ define(index_j_r, w21)                                      // Define register f
             i_s = 16                                        // Set size of i relative to Frame Record
             j_s = i_s + j_size                              // Set size of j relative to Frame Record
             temp_s = j_s + temp_size                        // Set size of temp relative to Frame Record
-            v_s = temp_s + 4                                // Set size of v relative to Frame Record
+            v_s = temp_s + i_size                           // Set size of v relative to Frame Record
     
-
-    
-fp          .req x29                                        // Define fp as x29
-lr          .req x30                                        // Define lr as x30
+            fp  .req x29                                    // Define fp as x29
+            lr  .req x30                                    // Define lr as x30
     
 fmt1:       .string "v[%d]: %d\n"                           // Printing string
 fmt2:       .string "\nSorted array:\n"                     // Printing string
@@ -68,7 +66,6 @@ loop2:      ldr     w25, [v_base_r, index_i_r, SXTW 2]      // Load v[i]
             str     w25, [fp, temp_s]                       // Store temp = v[i]
     
             ldr     index_i_r, [fp, i_s]                    // Load i and place in index_i_r
-            //TODO  
             str     index_i_r, [fp, j_s]                    // Store index_i_r in j_s (inner loop counter)
             b       innertest                               // Branch to inner loop pre-test
     
@@ -119,6 +116,6 @@ loop3:      adrp    x0, fmt1                                // Add fmt to x0
 test3:      cmp     index_i_r, SIZE                         // i < SIZE
             b.lt    loop3                                   // Branch to top of loop if i < SIZE
     
-done:       mov w0, 0                                       // Set return value
-            ldp fp, lr, [sp], dealloc                       // Deallocate memory
+done:       mov     w0, 0                                   // Set return value
+            ldp     fp, lr, [sp], dealloc                   // Deallocate memory
             ret                                             // Return control to OS
