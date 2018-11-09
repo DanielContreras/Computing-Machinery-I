@@ -42,7 +42,6 @@ fmt2:       .string "Initial box values:\n"
 fmt3:       .string "\nChanged box values:\n"
 first:      .string "first"
 second:     .string "second"
-test:       .string "test test\n"
             .balign 4
             .global main
 
@@ -72,11 +71,6 @@ main:       stp     fp, lr, [sp, alloc]!                            // Memory al
             add     x1, fp, second_s                                // Add second argument (address of second box)
             bl      printBox                                        // call printBox
 
-            // Passesd
-            adrp    x0, test                                        
-            add     x0, x0, :lo12:test                              
-            bl      printf                                          
-
             // If statement
             add     x0, fp, first_s                                 // Load first arg into x0
             add     x1, fp, second_s                                // Load second arg into x1
@@ -84,31 +78,16 @@ main:       stp     fp, lr, [sp, alloc]!                            // Memory al
             cmp     w0, FALSE                                       // Compare result with 0 (FALSE)
             b.eq    next                                            // If result is 0 (False) then leave if statement
 
-            // Failed
-            adrp    x0, test                                        
-            add     x0, x0, :lo12:test                              
-            bl      printf     
-
             // Inner if statement - call to move()
             add     x0, fp, first_s                                 // Load first arg into x0
             mov     w1, -5                                          // Load second arg into w1
             mov     w2, 7                                           // Load third arg into w2
             bl      move                                            // Call move()
 
-            // Failed
-            adrp    x0, test                                        
-            add     x0, x0, :lo12:test                              
-            bl      printf     
-
             // Inner if statement - call to expand()
             add     x0, fp, second_s                                // Load first arg into x0
             mov     w1, 3                                           // Load second arg into w1
             bl      expand                                          // Call expand()
-
-            // Failed
-            adrp    x0, test                                        
-            add     x0, x0, :lo12:test                              
-            bl      printf     
 
 next:       // printf()
             adrp    x0, fmt3                                        // Add fmt3 to x0
@@ -208,29 +187,30 @@ printBox:   stp     fp, lr, [sp, -16]!                              // Allocate 
 equal:		stp     fp, lr, [sp, -16]!					// Allocate 16 bytes of memory for the equal subroutine
 		    mov     fp, sp							// Move SP to new FP
 
-            mov     w0, FALSE
-
 		    ldr     w10, [x0, box_origin + point_x]				// Load box1_origin_x into w10
 		    ldr     w11, [x1, box_origin + point_x]				// Load box2_origin_x into w11
 		    cmp     w10, w11							// Compare two numbers
-		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
+		    b.ne    ret_false							// If the two numbers are not equal, branch to return false.
 
 		    ldr     w10, [x0, box_origin + point_y]				// Load box1_origin_y into w10
 		    ldr     w11, [x1, box_origin + point_y]				// Load box2_origin_y into w11
 		    cmp     w10, w11							// Compare two numbers
-		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
+		    b.ne    ret_false							// If the two numbers are not equal, branch to return false.
 
 		    ldr     w10, [x0, box_dimension + dimension_width]			// Load box1_width into w10
 		    ldr     w11, [x1, box_dimension + dimension_width]			// Load box2_width into w11
 		    cmp     w10, w11							// Compare two numbers
-		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
+		    b.ne    ret_false							// If the two numbers are not equal, branch to return false.
 
 		    ldr     w10, [x0, box_dimension + dimension_height]		// Load box1_height into w10
 		    ldr     w11, [x1, box_dimension + dimension_height]		// Load box2_height into w11
 		    cmp     w10, w11							// Compare two numbers
-		    b.ne    endequal							// If the two numbers are not equal, branch to return false.
+		    b.ne    ret_false							// If the two numbers are not equal, branch to return false.
 
-		    mov     w0, TRUE							// If the program has got to this point, all variables are equal. Set x0 to true.
+		    mov     x0, TRUE							// If the program has got to this point, all variables are equal. Set x0 to true.
+            b       endequal
+
+ret_false:  mov     w0, FALSE
 
 endequal:	ldp     fp, lr, [sp], 16						// De-allocate the frame record
 		    ret								// Return to caller.                                                  // Return to caller
