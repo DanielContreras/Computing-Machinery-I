@@ -1,9 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
 define(v_base_r, x19)                                       // Define v_base_r for offset of v[]
 define(index_i_r, w20)                                      // Define register for index i
 define(index_j_r, w21)                                      // Define register for index j

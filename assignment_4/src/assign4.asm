@@ -1,9 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
             /** General Assembler Equates */
             FALSE = 0                                               // Define FALSE as 0
             TRUE = 1                                                // Define FALSE as 0

@@ -1,9 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
 /** M4 Definitions */
 define(argc_r, w19)
 define(argv_r, x20)

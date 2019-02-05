@@ -1,9 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
 define(x_r, x19)
 define(y_r, x20)
 define(max_r, x21)

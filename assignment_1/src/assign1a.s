@@ -1,9 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
 fmt:    .string "Current Values:\n\tx: %d\n\ty: %d\n\tCurrent Maximum: %d\n\n"  // String being returned
         .balign 4
         .global main

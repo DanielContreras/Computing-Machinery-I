@@ -1,19 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
-
-
-
-
-
-
-
-
-
-
 fmt1:       .string "multiplier = 0x%08x (%d)  multiplicand = 0x%08x (%d)\n\n"      // initial values of variables print string
 fmt2:       .string "product = 0x%08x  multiplier = 0x%08x\n"                       // product and multiplier print string
 fmt3:       .string "64-bit result = 0x%016lx (%ld)\n"                              // 64-bit result print string

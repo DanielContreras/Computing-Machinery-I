@@ -1,9 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
 define(w_multiplier, w19)                                                           // Define a macro to store multiplier
 define(w_multiplicand, w20)                                                         // Define a macro to store multiplicand
 define(w_product, w21)                                                              // Define a macro to store product

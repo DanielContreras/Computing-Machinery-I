@@ -1,8 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- */
-
 #include <stdio.h>
 
 int main()

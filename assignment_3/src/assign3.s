@@ -1,13 +1,3 @@
-/**
- * Daniel Contreras
- * 10080311
- * CPSC 355 Fall 2018
- */
-
-                                       // Define x19 for offset of v[]
-                                      // Define register for index i
-                                      // Define register for index j
-
             /** Assembler offset Equates **/
             SIZE = 50                                       // Set SIZE to 50
             i_size = 4                                      // Size of i (4 bytes)
